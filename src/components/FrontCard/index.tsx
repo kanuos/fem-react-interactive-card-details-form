@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import type { FrontCardProps } from "./_";
 
 // images
@@ -8,7 +8,7 @@ import logo from "../../assets/card-logo.svg";
 // helpers
 import { getPaddedDigits, getFormattedCreditCard } from "../../utils/helpers";
 
-export const FrontCard: FC<FrontCardProps> = ({
+const FrontCardComponent: FC<FrontCardProps> = ({
   cardNumber,
   month,
   year,
@@ -17,7 +17,7 @@ export const FrontCard: FC<FrontCardProps> = ({
   return (
     <section
       aria-label="credit-card-front"
-      className="relative w-96 h-auto aspect-video rounded-lg overflow-hidden shadow-2xl">
+      className="relative w-80 h-auto aspect-video rounded-lg overflow-hidden shadow-2xl">
       <img
         src={logo}
         alt="Credit card logo"
@@ -33,7 +33,7 @@ export const FrontCard: FC<FrontCardProps> = ({
         <div className="mt-auto h-fit font-medium text-neutral-1 w-full grid gap-4">
           <h1
             aria-label="cardNumber"
-            className="text-xl flex items-center justify-start gap-x-6">
+            className="text-lg flex items-center justify-start gap-x-6">
             {getFormattedCreditCard(cardNumber).map((el, i) => (
               <span key={i} className="tracking-wider" data-digitgroup={i + 1}>
                 {el}
@@ -57,3 +57,5 @@ export const FrontCard: FC<FrontCardProps> = ({
     </section>
   );
 };
+
+export const FrontCard = memo(FrontCardComponent);
