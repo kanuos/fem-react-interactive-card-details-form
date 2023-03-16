@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, useId, useMemo, useState } from "react";
+import { getSpacedDigitCreditCard } from "../../utils/helpers";
 import { InputType } from "./_";
 
 export const Input: FC<InputType> = ({
@@ -30,6 +31,17 @@ export const Input: FC<InputType> = ({
     return `border-neutral-2`;
   }, [value, isFocused, error]);
 
+  const getValue = useMemo<string>(() => {
+    if (name === "name") {
+      return value;
+    }
+    const temp = value.toUpperCase();
+    if (name !== "card") {
+      return temp;
+    }
+    return getSpacedDigitCreditCard(temp);
+  }, [value, name]);
+
   return (
     <div
       aria-label="input-group"
@@ -40,11 +52,12 @@ export const Input: FC<InputType> = ({
         {label}
       </label>
       <input
+        autoComplete="off"
         id={id}
         name={name}
         aria-label={name}
         type="text"
-        value={value}
+        value={getValue}
         placeholder={placeholder}
         onChange={handleChange}
         onFocus={() => setIsFocused(true)}
@@ -52,7 +65,9 @@ export const Input: FC<InputType> = ({
         className={`border-2 transition-all ${borderCls} w-full font-medium text-neutral-4 placeholder:text-neutral-3 
         rounded-lg text-lg p-2.5 outline-none focus-visible:outline-none bg-[transparent] capitalize`}
       />
-      <small className="font-medium text-error">{error}</small>
+      <p className="text-xs">
+        <small className="font-medium text-error">{error}</small>
+      </p>
     </div>
   );
 };

@@ -37,7 +37,7 @@ const cardNumberValidator = z
     .string({ required_error })
     .trim()
     .nonempty({ message: required_error })
-    .regex(/^[0-9]{4}[\s]{0,1}[0-9]{4}[\s]{0,1}[0-9]{4}[\s]{0,1}[0-9]{4}$/, {
+    .regex(/^[0-9]{4}[\s]{1}[0-9]{4}[\s]{1}[0-9]{4}[\s]{1}[0-9]{4}$/, {
         message: "Wrong format, numbers only",
     })
 
