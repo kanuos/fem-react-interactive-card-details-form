@@ -25,7 +25,7 @@ export const Form: FC<FormProps> = ({
     <form
       aria-label="user-form"
       onSubmit={handleSubmit}
-      className="grid grid-cols-4 w-full mt-8 lg:my-auto p-8 min-h-[50vh] h-auto gap-x-2 gap-y-4 max-w-md md:max-w-sm mx-auto">
+      className="grid grid-cols-4 w-full mt-10 lg:my-auto p-8 min-h-[50vh] h-auto gap-x-2 gap-y-4 max-w-md md:max-w-sm mx-auto">
       {FORM_FIELDS.map((el, i) => (
         <Input
           key={i}
